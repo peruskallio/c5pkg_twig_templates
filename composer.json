@@ -1,6 +1,5 @@
 {
     "name": "mainio/c5-twig-templates",
-    "version": "0.0.1",
     "type": "library",
     "description": "Makes it possible to use twig templates in concrete5.",
     "keywords": ["concrete5", "twig", "templates"],
