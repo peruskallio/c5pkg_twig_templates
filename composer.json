@@ -1,0 +1,30 @@
+{
+    "name": "mainio/c5-twig-templates",
+    "version": "0.0.1",
+    "type": "library",
+    "description": "Makes it possible to use twig templates in concrete5.",
+    "keywords": ["concrete5", "twig", "templates"],
+    "homepage": "http://www.mainiotech.fi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antti Hukkanen",
+            "email": "antti.hukkanen@mainiotech.fi",
+            "homepage": "http://www.mainiotech.fi"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/twig-bridge": "2.5.*"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Mainio\\C5\\Twig\\" : "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
