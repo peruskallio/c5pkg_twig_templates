@@ -1,8 +1,8 @@
 <?php
 namespace Mainio\C5\Twig;
 
+use Concrete\Core\Package\PackageList;
 use Config;
-use Package;
 use Twig_Environment;
 use Twig_Extension_Debug;
 use Twig_Loader_Filesystem;
@@ -30,7 +30,8 @@ class Factory
                 $translator->addResource('mo', $systemTranslation, $locale);
             }
 
-            foreach (Package::getList() as $pkg) {
+            $pkgList = PackageList::get();
+            foreach ($pkgList->getPackages() as $pkg) {
                 $packageTranslation = $pkg->getPackagePath() . '/' . DIRNAME_LANGUAGES . '/' . $locale . '/LC_MESSAGES/messages.mo';
                 if (file_exists($packageTranslation)) {
                     $translator->addResource('mo', $packageTranslation, $locale);
