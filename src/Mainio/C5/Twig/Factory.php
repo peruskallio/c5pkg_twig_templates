@@ -22,22 +22,27 @@ class Factory
         // we have a custom locale set that requires translations.
         $tra = \Localization::getTranslate();
         if (is_object($tra)) {
-            // This introduces more overhead to the translations
-            // loading but it is not possible to get the list of
-            // translations from the Zend's Translator object.
+            // This introduces more overhead to the translations loading but it
+            // is not possible to get the list of translations from the Zend's
+            // Translator object.
             $systemTranslation = DIR_LANGUAGES . '/' . $locale . '/LC_MESSAGES/messages.mo';
             if (file_exists($systemTranslation)) {
                 $translator->addResource('mo', $systemTranslation, $locale);
             }
+
             foreach (Package::getList() as $pkg) {
                 $packageTranslation = $pkg->getPackagePath() . '/' . DIRNAME_LANGUAGES . '/' . $locale . '/LC_MESSAGES/messages.mo';
                 if (file_exists($packageTranslation)) {
                     $translator->addResource('mo', $packageTranslation, $locale);
                 }
             }
-            // TODO: Application-specific translations missing since there is
-            //       no implementation currently for those in the core.
+
+            $appTranslation = DIR_LANGUAGES_SITE_INTERFACE . '/' . $locale . '.mo';
+            if (file_exists($appTranslation)) {
+                $translator->addResource('mo', $appTranslation, $locale);
+            }
         }
+
         return $translator;
     }
 
