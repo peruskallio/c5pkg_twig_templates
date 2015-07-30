@@ -61,10 +61,10 @@ class Factory
         $twigBridgePath = $paths['lib'] . '/symfony/twig-bridge/Symfony/Bridge/Twig';
 
         $opts = array();
-        if (Config::get('app.package_dev_mode')) {
+        if (Config::get('app.twig_debug')) {
             $opts['debug'] = true;
-        } else {
-            $opts['cache'] = $viewPath . '/!twig_cache';
+        } elseif ($paths['cache']) {
+            $opts['cache'] = $paths['cache'];
         }
         $opts = array_merge_recursive($opts, $options);
         $twig = new Twig_Environment(new Twig_Loader_Filesystem(

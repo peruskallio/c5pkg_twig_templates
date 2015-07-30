@@ -1,10 +1,12 @@
 <?php
 namespace Mainio\C5\Twig;
 
+use Config;
 use Core;
 use Package;
 use \Concrete\Core\Application\Application;
 use \Concrete\Core\Foundation\Service\Provider as ServiceProvider;
+use \Mainio\C5\Twig\Service\Twig as TwigService;
 use \Symfony\Component\Form\Forms;
 use \Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 
@@ -33,14 +35,19 @@ class TwigServiceProvider extends ServiceProvider
             $basePath = DIR_APPLICATION;
         }
 
+        $twigService = new TwigService($this->pkg);
+
         // We want the vendor dir from this particular library repository.
         $vendorDir = __DIR__;
         for ($i=0; $i < 6; $i++) {
             $vendorDir = dirname($vendorDir);
         }
 
-        $paths = array('base' => $basePath, 'lib' => $vendorDir);
+        $paths = array('base' => $basePath, 'lib' => $vendorDir, 'cache' => $twigService->getCacheDirectory());
         $singletons = array(
+            'twig' => function() use ($twigService) {
+                return $twigService;
+            },
             'environment/twig' => function() use ($paths) {
                 $translator = Core::make('twig/translator');
                 return Factory::createEnvironment($paths, $translator);
@@ -68,6 +75,12 @@ class TwigServiceProvider extends ServiceProvider
                 $this->app->singleton($key, $value);
             }
         }
+    }
+
+    public function clearTwigCache()
+    {
+        $dir = $this->getTwigCacheDirectory();
+        return Core::make('helper/file')->removeAll($dir);
     }
 
 }
