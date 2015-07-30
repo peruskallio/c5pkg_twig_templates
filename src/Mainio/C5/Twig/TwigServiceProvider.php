@@ -5,6 +5,7 @@ use Config;
 use Core;
 use Package;
 use \Concrete\Core\Application\Application;
+use \Concrete\Core\Console\Application as ConsoleApplication;
 use \Concrete\Core\Foundation\Service\Provider as ServiceProvider;
 use \Mainio\C5\Twig\Service\Twig as TwigService;
 use \Symfony\Component\Form\Forms;
@@ -77,10 +78,9 @@ class TwigServiceProvider extends ServiceProvider
         }
     }
 
-    public function clearTwigCache()
-    {
-        $dir = $this->getTwigCacheDirectory();
-        return Core::make('helper/file')->removeAll($dir);
-    }
+    public function registerCli(ConsoleApplication $console)
+     {
+        $cli->add(new \Mainio\C5\Twig\Command\TwigClearCacheCommand());
+     }
 
 }
