@@ -21,6 +21,9 @@ use \Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 class TwigServiceProvider extends ServiceProvider
 {
 
+    protected $app;
+    protected $pkg;
+
     public function __construct(Application $app, Package $pkg = null) {
         $this->app = $app;
         $this->pkg = $pkg;
