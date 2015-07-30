@@ -4,6 +4,32 @@ This is a composer package that provides twig templates possibility for concrete
 Currently it only works with single pages, in the future it should also work in
 other areas of concrete5.
 
+## How to use?
+
+Add a composer.json file into your concrete5 package's directory. Into that
+file, add the following content:
+
+```
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/mainio/c5pkg_twig_templates.git"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true
+    },
+    "require": {
+        "mainio/c5-twig-templates": "dev-master",
+    }
+}
+```
+
+If you are looking for code examples, e.g. the following package utilizes this package:
+
+https://github.com/mainio/c5_symfony_forms_example
+
 
 ## Roadmap
 
