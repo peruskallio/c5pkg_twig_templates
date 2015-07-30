@@ -17,6 +17,13 @@ file, add the following content:
 }
 ```
 
+And then run `composer install` in the same directory. After this, add the
+following on top of your package controller (after the namespace definition):
+
+```php
+include(dirname(__FILE__) . '/vendor/autoload.php');
+```
+
 If you are looking for code examples, e.g. the following package utilizes this package:
 
 https://github.com/mainio/c5_symfony_forms_example
