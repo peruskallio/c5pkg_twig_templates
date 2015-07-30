@@ -80,7 +80,7 @@ class TwigServiceProvider extends ServiceProvider
 
     public function registerCli(ConsoleApplication $console)
      {
-        $cli->add(new \Mainio\C5\Twig\Command\TwigClearCacheCommand());
+        $console->add(new \Mainio\C5\Twig\Command\TwigClearCacheCommand());
      }
 
 }
