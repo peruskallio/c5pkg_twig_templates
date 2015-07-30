@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4" : {
-            "Mainio\\C5\\Twig\\" : "src/"
+            "Mainio\\C5\\Twig\\" : "src/Mainio/C5/Twig"
         }
     },
     "extra": {
