@@ -11,17 +11,8 @@ file, add the following content:
 
 ```
 {
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/mainio/c5pkg_twig_templates.git"
-        }
-    ],
-    "config": {
-        "optimize-autoloader": true
-    },
     "require": {
-        "mainio/c5-twig-templates": "dev-master",
+        "mainio/c5-twig-templates": "*"
     }
 }
 ```
