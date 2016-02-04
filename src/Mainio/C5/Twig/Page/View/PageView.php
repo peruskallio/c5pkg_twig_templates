@@ -84,7 +84,7 @@ class PageView extends CorePageView
         $file = $fh->replaceExtension($file, $ext);
 
         $prefix = '';
-        if (strlen($this->c->getPackageID())) {
+        if (strlen($this->c->getPackageID()) && $this->c->getPackageID() > 0) {
             $prefix = $this->c->getPackageHandle() . '/';
         }
         $twig = Core::make($prefix . 'environment/twig');
