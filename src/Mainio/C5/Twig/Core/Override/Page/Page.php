@@ -1,5 +1,5 @@
 <?php
-namespace Mainio\C5\Twig\Core\Override\Page;
+namespace Concrete\Core\Page;
 
 use Mainio\C5\Twig\Core\Original\Page\Page as CorePage;
 use Package;

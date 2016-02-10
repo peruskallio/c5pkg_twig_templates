@@ -99,19 +99,13 @@ class TwigServiceProvider extends ServiceProvider
 
     public function registerCoreOverrides()
     {
-        /*$base = __DIR__;
+        $base = __DIR__;
         $mapping = array(
-            'Concrete\\Core\\Page\\Single' => $base . '/Core/Override/Page/Single.php',
             'Concrete\\Core\\Page\\Page' => $base . '/Core/Override/Page/Page.php',
+            'Concrete\\Core\\Page\\Single' => $base . '/Core/Override/Page/Single.php',
         );
         $loader = new MapClassLoader($mapping);
-        $loader->register(true);*/
-
-        // TODO: Does the alias approach work properly with the core?
-        // Not an ideal way to override but this way we don't need to define
-        // the core namespace within our code.
-        class_alias('\\Mainio\\C5\\Twig\\Core\\Override\\Page\\Single', '\\Concrete\\Core\\Page\\Single');
-        class_alias('\\Mainio\\C5\\Twig\\Core\\Override\\Page\\Page', '\\Concrete\\Core\\Page\\Page');
+        $loader->register(true);
     }
 
 }
