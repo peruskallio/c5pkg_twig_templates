@@ -9,6 +9,7 @@ use Concrete\Core\Foundation\Service\Provider as ServiceProvider;
 use Mainio\C5\Twig\Page\PathResolver;
 use Mainio\C5\Twig\Service\Twig as TwigService;
 use Package;
+use Symfony\Component\ClassLoader\MapClassLoader;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 
