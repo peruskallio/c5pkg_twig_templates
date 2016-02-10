@@ -77,11 +77,11 @@ class PageView extends CorePageView
         $fh = Core::make('helper/file');
         $dir = dirname($file);
         $file = substr($file, strlen($dir)+1);
-        $ext = 'twig';
+        /*$ext = 'twig';
         if (strlen($this->format)) {
             $ext = $this->format . '.' . $ext;
         }
-        $file = $fh->replaceExtension($file, $ext);
+        $file = $fh->replaceExtension($file, $ext);*/
 
         $prefix = '';
         if (strlen($this->c->getPackageID()) && $this->c->getPackageID() > 0) {

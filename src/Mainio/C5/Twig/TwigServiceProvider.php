@@ -3,20 +3,21 @@ namespace Mainio\C5\Twig;
 
 use Config;
 use Core;
+use Concrete\Core\Application\Application;
+use Concrete\Core\Console\Application as ConsoleApplication;
+use Concrete\Core\Foundation\Service\Provider as ServiceProvider;
+use Mainio\C5\Twig\Page\PathResolver;
+use Mainio\C5\Twig\Service\Twig as TwigService;
 use Package;
-use \Concrete\Core\Application\Application;
-use \Concrete\Core\Console\Application as ConsoleApplication;
-use \Concrete\Core\Foundation\Service\Provider as ServiceProvider;
-use \Mainio\C5\Twig\Service\Twig as TwigService;
-use \Symfony\Component\Form\Forms;
-use \Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 
 /**
  * This class needs to be initialized in the Package's on_start method if this
  * is needed for the package context. If we need this in the Application
  * context, we'll need to initiate this in the Application's bootstrap process.
- * 
- * This will provide a context specific 
+ *
+ * This will provide a context specific
  */
 class TwigServiceProvider extends ServiceProvider
 {
@@ -55,7 +56,7 @@ class TwigServiceProvider extends ServiceProvider
             'environment/twig' => function() use ($paths) {
                 $translator = Core::make('twig/translator');
                 return Factory::createEnvironment($paths, $translator);
-            },
+            }
         );
 
         foreach($singletons as $key => $value) {
@@ -79,6 +80,38 @@ class TwigServiceProvider extends ServiceProvider
                 $this->app->singleton($key, $value);
             }
         }
+
+        // Non-singleton binds in the shared context.
+        $binds = array(
+            'page/path_resolver' => function(array $params) {
+                $pr = new PathResolver($params[0]);
+                $pr->addExtension('php');
+                $pr->addExtension('html.twig');
+                return $pr;
+            },
+        );
+        foreach ($binds as $key => $value) {
+            if (!$this->app->bound($key)) {
+                $this->app->bind($key, $value);
+            }
+        }
+    }
+
+    public function registerCoreOverrides()
+    {
+        /*$base = __DIR__;
+        $mapping = array(
+            'Concrete\\Core\\Page\\Single' => $base . '/Core/Override/Page/Single.php',
+            'Concrete\\Core\\Page\\Page' => $base . '/Core/Override/Page/Page.php',
+        );
+        $loader = new MapClassLoader($mapping);
+        $loader->register(true);*/
+
+        // TODO: Does the alias approach work properly with the core?
+        // Not an ideal way to override but this way we don't need to define
+        // the core namespace within our code.
+        class_alias('\\Mainio\\C5\\Twig\\Core\\Override\\Page\\Single', '\\Concrete\\Core\\Page\\Single');
+        class_alias('\\Mainio\\C5\\Twig\\Core\\Override\\Page\\Page', '\\Concrete\\Core\\Page\\Page');
     }
 
 }

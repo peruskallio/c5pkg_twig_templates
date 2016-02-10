@@ -82,6 +82,7 @@ class View extends CoreView
         $file = $fh->replaceExtension($file, $ext);
 
         $prefix = '';
+        var_dump($this->pkgHandle);
         if (strlen($this->pkgHandle)) {
             $prefix = $this->pkgHandle . '/';
         }
