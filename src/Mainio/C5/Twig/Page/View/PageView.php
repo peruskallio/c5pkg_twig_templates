@@ -74,14 +74,16 @@ class PageView extends CorePageView
 
     protected function renderTwigTemplate($file, array $scopeItems = array())
     {
-        $fh = Core::make('helper/file');
         $dir = dirname($file);
         $file = substr($file, strlen($dir)+1);
-        /*$ext = 'twig';
-        if (strlen($this->format)) {
-            $ext = $this->format . '.' . $ext;
+
+        $pr = Core::make('page/path_resolver');
+        if ($pr->getFileExtensionFor($file) == 'php') {
+            // Backwards compatibility fix
+            $fh = Core::make('helper/file');
+            $ext = 'html.twig';
+            $file = $fh->replaceExtension($file, $ext);
         }
-        $file = $fh->replaceExtension($file, $ext);*/
 
         $prefix = '';
         if (strlen($this->c->getPackageID()) && $this->c->getPackageID() > 0) {

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Original Page class from the core.
+ *
+ * Modification made to this class (required if updated):
+ * - Changed namespace
+ * - Changed all Page:: static calls to static::
+**/
 
 ///namespace Concrete\Core\Page;
 namespace Mainio\C5\Twig\Core\Original\Page;
