@@ -48,7 +48,7 @@ class PathResolver implements PathResolverInterface
         if ($extension === null) {
             $extension = array_shift(array_values($this->fileExtensions));
         }
-        return Core::make('helper/file')->replaceExtension(FILENAME_COLLECTION_VIEW, $extension);
+        return Core::make('helper/file')->replaceExtension(FILENAME_COLLECTION_VIEW, ltrim($extension, '.'));
     }
 
     public function getFileExtensionFor($path)

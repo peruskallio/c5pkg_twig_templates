@@ -101,13 +101,18 @@ class TwigServiceProvider extends ServiceProvider
 
     public function registerCoreOverrides()
     {
-        $base = __DIR__;
-        $mapping = array(
-            'Concrete\\Core\\Page\\Page' => $base . '/Core/Override/Page/Page.php',
-            'Concrete\\Core\\Page\\Single' => $base . '/Core/Override/Page/Single.php',
+        $overrides = array(
+            'Concrete\\Core\\Page\\Page' => 'Mainio\\C5\\Twig\\Core\\Override\\Page\\Page',
+            'Concrete\\Core\\Page\\Single' => 'Mainio\\C5\\Twig\\Core\\Override\\Page\\Single',
         );
-        $loader = new MapClassLoader($mapping);
-        $loader->register(true);
+
+        foreach ($overrides as $cls => $ovr) {
+            class_alias($ovr, $cls);
+
+            // Make sure other aliases defined after this will not affect the
+            // loading of these overrides.
+            class_exists($cls);
+        }
     }
 
 }

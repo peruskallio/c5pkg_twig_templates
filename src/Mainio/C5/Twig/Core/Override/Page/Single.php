@@ -1,5 +1,5 @@
 <?php
-namespace Concrete\Core\Page;
+namespace Mainio\C5\Twig\Core\Override\Page;
 
 use Core;
 use Mainio\C5\Twig\Core\Original\Page\Single as CoreSinglePage;

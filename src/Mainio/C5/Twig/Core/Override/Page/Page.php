@@ -1,7 +1,8 @@
 <?php
-namespace Concrete\Core\Page;
+namespace Mainio\C5\Twig\Core\Override\Page;
 
 use Core;
+use Environment;
 use Mainio\C5\Twig\Core\Original\Page\Page as CorePage;
 use Package;
 
@@ -39,7 +40,7 @@ class Page extends CorePage
                 } else {
                     $path = substr($file, 0, strpos($file, '.' . $ext));
                 }
-                $r = $env->getRecord(DIRNAME_CONTROLLERS.'/'.DIRNAME_PAGE_CONTROLLERS.$path.'.'.$ext, $this->getPackageHandle());
+                $r = $env->getRecord(DIRNAME_CONTROLLERS.'/'.DIRNAME_PAGE_CONTROLLERS.$path.'.php', $this->getPackageHandle());
                 $prefix = $r->override ? true : $this->getPackageHandle();
                 $class = core_class('Controller\\SinglePage\\'.str_replace('/', '\\', camelcase($path, true)), $prefix);
             }
