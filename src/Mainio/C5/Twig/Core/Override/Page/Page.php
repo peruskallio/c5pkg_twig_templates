@@ -1,6 +1,7 @@
 <?php
 namespace Concrete\Core\Page;
 
+use Core;
 use Mainio\C5\Twig\Core\Original\Page\Page as CorePage;
 use Package;
 

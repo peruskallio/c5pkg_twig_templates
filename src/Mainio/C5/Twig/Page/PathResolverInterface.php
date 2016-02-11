@@ -10,6 +10,6 @@ interface PathResolverInterface
     public function getViewFilename($extension);
     public function getFileExtensionFor($path);
     public function getFileBasenameFor($path);
-    public function resolvePagePath($node, $pkg);
+    public function resolvePagePath($node);
 
 }

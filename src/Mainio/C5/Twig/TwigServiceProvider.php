@@ -84,10 +84,11 @@ class TwigServiceProvider extends ServiceProvider
 
         // Non-singleton binds in the shared context.
         $binds = array(
-            'page/path_resolver' => function(array $params) {
-                $pr = new PathResolver($params[0]);
-                $pr->addExtension('php');
-                $pr->addExtension('html.twig');
+            'page/path_resolver' => function($app, array $params) {
+                $pkg = is_object($params[0]) ? $params[0] : null;
+                $pr = new PathResolver($pkg);
+                $pr->addFileExtension('php');
+                $pr->addFileExtension('html.twig');
                 return $pr;
             },
         );
