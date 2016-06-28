@@ -58,7 +58,7 @@ class Factory
     public static function createEnvironment($paths, \Symfony\Component\Translation\Translator $translator, $options = array())
     {
         $viewPath = $paths['base'] . '/' . DIRNAME_VIEWS;
-        $twigBridgePath = $paths['lib'] . '/symfony/twig-bridge';
+        $twigBridgePath = $paths['lib'] . '/symfony/twig-bridge/Symfony/Bridge/Twig';
 
         $opts = array();
         if (Config::get('app.twig_debug')) {
