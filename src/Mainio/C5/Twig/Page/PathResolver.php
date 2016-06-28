@@ -10,6 +10,7 @@ class PathResolver implements PathResolverInterface
 
     protected $package;
     protected $fileExtensions = array();
+    protected $forceExtension;
 
     public function __construct(Package $pkg = null)
     {
@@ -26,6 +27,11 @@ class PathResolver implements PathResolverInterface
         if (($ind = array_search($extension, $this->fileExtensions)) !== false) {
             unset($this->fileExtensions[$ind]);
         }
+    }
+
+    public function setForceExtension($ext)
+    {
+        $this->forceExtension = $ext;
     }
 
     public function sanitizePath($path)
@@ -109,6 +115,9 @@ class PathResolver implements PathResolverInterface
             $file4 = DIR_FILES_CONTENT_REQUIRED . '/' . $node . '.' . $extension;
         }
 
+        if (isset($this->forceExtension) && $this->forceExtension !== null) {
+            $extension = $this->forceExtension;
+        }
         if (file_exists($file1)) {
             $pathToFile = "/{$node}/" . $this->getViewFilename($extension);
         } elseif (file_exists($file2)) {

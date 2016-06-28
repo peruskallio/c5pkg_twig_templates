@@ -15,6 +15,9 @@ class Single extends SinglePage
     public static function getPathToNode($node, $pkg)
     {
         $pr = Core::make('page/path_resolver', array($pkg));
+        // We need to force the database saved view files to be with the '.php'
+        // extension because otherwise the view files are not loaded properly.
+        $pr->setForceExtension('php');
         return $pr->resolvePagePath($node);
     }
 
